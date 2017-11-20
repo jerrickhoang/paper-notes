@@ -26,7 +26,8 @@ Currently there is no concept of entities in fully connected layers. Each neuron
 
 ### Implementation details
 
-*insert picture of architecture here*
+
+ ![architecture](architecture.png)
 
 **Architecture details**
 
@@ -82,8 +83,8 @@ def squash(sj):
   \]
   - $c_{ij} = \frac{exp(b_{ij})}{\sum exp(b_{ik})}$ representing the probability that capsule_i "agrees" with capsule_j. $W_{ij}$ is a transformation that maps the space of capsule i to the space of capsule j. In this example, our input dimension is 8 and output dimension is 16, so naturally $W_{ij}$ is a matrix of dimension (8x16). For each forward pass, the prior $b_{ij}$ are set to 0 and are updated based on the agreement between i and j, $v^T_j(W^T_{ij}u_i)$, the pseudocode for the algorithm is,
 
-  **insert picture**
-![](CAT-assets/README-684b45a8.jpg)
+
+ ![routing-algo](routing-algo.png)
   - The actual code that implements the idea is shown below,
 
 ```python
@@ -146,5 +147,44 @@ def squash(sj):
   v_norm = tf.norm(v, ord=2, axis=2, name='digit_caps_norm')
 ```
 
+- The loss function is another interesting part. Recall that the digit capsule layer outputs 10 16D capsules, whose norms represent the probability that the input is the coresponding digit. Hence, after a forward pass, we have a pmf over the digits. Foe each capsule, the loss function they use (without regularization) is,
+
+\[
+L_k = y_k max(0, (0.9 - ||v_k||)^2) + 0.5(1-y_k)max(0, (||v_k||-0.1)^2)
+\]
+- Where $y_k$ is 1 if the digit is k, and 0 otherwise. Hence, the first term is a "positive reward" and the second term is the "negative reward". If the digit is k and the model gives it low probability then the first term of the loss will be big, if the digit is $l \neq k$, then the second term of the loss will be big if the model gives it high probability. It is not very clear to me why they did not use other more traditional costs like cross entropy. However, I believe this cost is mathematically equivalent to a traditional information metric cost. **TODO(jhoang): figure this out.** The implementation of this cost looks like this,
+```python
+# loss = T_k max(0, 0.9 - norm(v)) ^ 2 + 0.5 * ( 1 - T_k) max (0, norm(v) - 0.1) ^ 2 + 0.0005*reonstruction_loss
+# = max(0, 0.9 - norm(v) * T_k) ^ 2 + 0.5 * max (0, norm(v) * ( 1 - T_k) - 0.1) ^ 2 + 0.0005*reonstruction_loss
+
+# max(0, 0.9 - norm(v)) ^ 2
+pos = tf.square(tf.maximum(0.0, 0.9 - tf.reduce_sum(v_norm * label_y, axis=1)))
+pos = tf.reduce_mean(pos)
+
+# max (0, norm(v) - 0.1) ^ 2
+neg = tf.square(tf.maximum(0.0, tf.reduce_sum(v_norm * (1-label_y), axis=1) - 0.1))
+neg = 0.5 * tf.reduce_mean(neg)
+```
+- Reconstruction as regularization. To force the digit capsule to learn the high dimensional state of the digits, we can generate a 28x28 image from this hidden state and penalize the output of it's too far away from the original input,
+
+ ![routing-algo](reconstruction.png)
+
+ ```python
+ label_y_ = tf.expand_dims(label_y, axis=2)
+  v_out = tf.reshape(label_y_ * v, [-1, 10*16])
+  fc = slim.fully_connected(v_out, 512,
+                            weights_initializer=tf.truncated_normal_initializer(stddev=0.1),
+                            activation_fn=tf.nn.relu)
+  fc = slim.fully_connected(fc, 1024,
+                            weights_initializer=tf.truncated_normal_initializer(stddev=0.1),
+                            activation_fn=tf.nn.relu)
+  fc = slim.fully_connected(fc, 784,
+                            weights_initializer=tf.truncated_normal_initializer(stddev=0.1),
+                            activation_fn=None)
+  fc = tf.sigmoid(fc)
+
+  reconstruction = tf.reduce_mean(tf.reduce_sum(tf.square(input_x - fc), axis=-1))
+ ```
+ - I think this reconstruction regularization method is quite neat and can be used outside of the context.
 
 ### Results
