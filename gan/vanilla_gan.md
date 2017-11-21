@@ -9,18 +9,6 @@ https://arxiv.org/pdf/1406.2661.pdf
 - The paper shows that training GAN is equivalent to minimizing the Jensen-Shannon divergence. The paper also proves that under some conditions, theoretically the generator distribution should converge to true distribution.
 - GAN is one of the most simple but powerful idea.
 
-# Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
-
-by **Alec Radford**, **Luke Metz**, and **Soumith Chintala**
-
-https://arxiv.org/abs/1511.06434
-
-### Short summary
-- This paper doesn't have a lot of meat. It's the main reason why I decided to put notes for this paper together with the original paper.
-- The main and only idea of this paper is using CNN (with some constraints) for both the generator and discriminator. In particular, the constraints are,
-
-![constraints](constraints.png)
-
 ### Implementation
 
 First, let's revisit the generative problem. Given a dataset $D$ containing $N$ samples drawn from a hidden distribution $p_{data}(x)$. Our task is to somehow draw more samples from this distribution.
@@ -37,14 +25,27 @@ D(x) =
 \end{cases}
 \]
 
-First, we're going to implement the architecture described in Alec et al, then we will follow the prove in Goodfellow et al, to draw the equivalence between GAN and Jensen-Shannon. Finally, we will prove that with enough capacity, the GAN objective will be achieved at least in theory.
+First, we're going to implement one simple GAN, then we will follow the prove in Goodfellow et al, to draw the equivalence between GAN and Jensen-Shannon. Finally, we will prove that with enough capacity, the GAN objective will be achieved at least in theory.
 
-In DCGAN, the generator architecture is as follows,
+The generator can be as simple as,
 
-![generator](generator.png)
+```python
+def generator(z)
+  with tf.variable_scope('generator'):
+    gen = slim.fully_connected(z, 256, activation_fn=tf.nn.relu)
+    gen = slim.fully_connected(gen, 784, activation_fn=tf.nn.relu)
+  return gen
+```
 
-The operations between layers are called transposed convolutional layer. Visually, for a transposed convolution with stride one and no padding, we just pad the original input (blue entries) with zeroes (white entries).
+The discriminator can be as simple as,
 
-![deconv](deconv.gif)
+```python
+    def discriminator(x)
+      with tf.variable_scope('discriminator'):
+        dis = slim.fully_connected(x, 384, activation_fn=tf.nn.relu)
+        dis = slim.fully_connected(dis, 128, activation_fn=tf.nn.relu)
+        dis = slim.fully_connected(dis, 1, actiation_fn=tf.nn.relu)
+      return dis
+```
 
 ### Results and Discussion
