@@ -331,5 +331,56 @@ Egilibility trace
 ![summary](summary.png)
 
 
-
 ### Lecture 5 - Model free control
+
+on-policy learning: Learn about policy $\pi$ from experience from policy $\pi$
+
+off policy learning: Learng about policy $\pi$ from experience from policy $\tau$
+
+model-free policy iteration: use $TD(\lambda)$ to do policy evaluation then use $\pi'(s) = argmax_a (Q(s, a))$ as policy improvement (this is model-free)
+
+$\varepsilon$-Greedy exploration
+
+So far, policy is too greedy, i.e. always pick action with best action-value. $\varepsilon$-Greedy picks a random state with probability $\varepsilon$
+
+Note: need to prove $\varepsilon$-Greedy is really an improvement
+
+MC policy iteration
+- fully evaluate value function
+- improve policy
+![mc_policy](mc_policy.png)
+
+MC control
+- estimate value function
+- improve policy
+![mc_control](mc_control.png)
+
+However, we want randomness to slowly disappear as we approach the optimal policy
+
+GLIE conditions (Greedy in the limit with infinite exploration)
+  - all state action pairs are explored infinitely many times
+  - the policy converges to a greedy policy
+
+
+### Lecture 7 - Policy gradient method
+
+value-based
+- learnt value functions
+- policy is derived from value functions
+
+policy-based
+- learnt policy
+- no value function
+
+actor-critic
+- learnt policy
+- learnt value function
+
+policy-based:
+pros
+- better convergence properties
+- effective in high dimensional or continuous action spaces
+- can learn stochastic policies
+cons
+- typically converge to local minimum
+- evaluating a policy is typically inefficient and high variance
