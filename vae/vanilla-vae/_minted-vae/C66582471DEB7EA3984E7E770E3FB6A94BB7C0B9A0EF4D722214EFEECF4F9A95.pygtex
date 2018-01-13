@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k}{with} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{variable\PYGZus{}scope}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}z\PYGZsq{}}\PYG{p}{):}
+    \PYG{n}{eps} \PYG{o}{=} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{random\PYGZus{}normal}\PYG{p}{(}\PYG{n}{shape}\PYG{o}{=}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{(}\PYG{n}{log\PYGZus{}sigma}\PYG{p}{),} \PYG{n}{mean}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{stddev}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{float32}\PYG{p}{)}
+    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{z} \PYG{o}{=} \PYG{n}{mu} \PYG{o}{+} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{exp}\PYG{p}{(}\PYG{n}{log\PYGZus{}sigma}\PYG{p}{))} \PYG{o}{*} \PYG{n}{eps}
+\end{Verbatim}

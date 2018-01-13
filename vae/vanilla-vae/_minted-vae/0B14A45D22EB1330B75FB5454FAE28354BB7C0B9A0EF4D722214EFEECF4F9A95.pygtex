@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{rec} \PYG{o}{=} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{reduce\PYGZus{}mean}\PYG{p}{(}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{reduce\PYGZus{}sum}\PYG{p}{(}
+  \PYG{n}{tf}\PYG{o}{.}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{sigmoid\PYGZus{}cross\PYGZus{}entropy\PYGZus{}with\PYGZus{}logits}\PYG{p}{(}\PYG{n}{logits}\PYG{o}{=}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{labels}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{input\PYGZus{}x}\PYG{p}{),} \PYG{l+m+mi}{1}\PYG{p}{))}
+\end{Verbatim}

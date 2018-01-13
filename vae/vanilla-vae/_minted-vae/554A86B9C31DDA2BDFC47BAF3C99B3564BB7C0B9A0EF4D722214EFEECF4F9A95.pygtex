@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k}{with} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{variable\PYGZus{}scope}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}decoder\PYGZsq{}}\PYG{p}{):}
+    \PYG{n}{dec} \PYG{o}{=} \PYG{n}{slim}\PYG{o}{.}\PYG{n}{fully\PYGZus{}connected}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{z}\PYG{p}{,} \PYG{l+m+mi}{256}\PYG{p}{,} \PYG{n}{activation\PYGZus{}fn}\PYG{o}{=}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{relu}\PYG{p}{)}
+    \PYG{n}{dec} \PYG{o}{=} \PYG{n}{slim}\PYG{o}{.}\PYG{n}{fully\PYGZus{}connected}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{l+m+mi}{384}\PYG{p}{,} \PYG{n}{activation\PYGZus{}fn}\PYG{o}{=}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{relu}\PYG{p}{)}
+    \PYG{n}{dec} \PYG{o}{=} \PYG{n}{slim}\PYG{o}{.}\PYG{n}{fully\PYGZus{}connected}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{l+m+mi}{512}\PYG{p}{,} \PYG{n}{activation\PYGZus{}fn}\PYG{o}{=}\PYG{n}{tf}\PYG{o}{.}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{relu}\PYG{p}{)}
+    \PYG{n}{dec} \PYG{o}{=} \PYG{n}{slim}\PYG{o}{.}\PYG{n}{fully\PYGZus{}connected}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{l+m+mi}{784}\PYG{p}{,} \PYG{n}{activation\PYGZus{}fn}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}
+\end{Verbatim}
