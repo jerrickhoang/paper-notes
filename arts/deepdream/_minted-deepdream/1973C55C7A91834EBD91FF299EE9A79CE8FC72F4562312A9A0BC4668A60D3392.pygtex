@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{layer\PYGZus{}contributions} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+      \PYG{l+s+s1}{\PYGZsq{}mixed2\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{0.2}\PYG{p}{,}
+      \PYG{l+s+s1}{\PYGZsq{}mixed3\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{3.}\PYG{p}{,}
+      \PYG{l+s+s1}{\PYGZsq{}mixed4\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{2.}\PYG{p}{,}
+      \PYG{l+s+s1}{\PYGZsq{}mixed5\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{1.5}
+  \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{dream} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{input}
+  \PYG{n}{grads} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{gradients}\PYG{p}{(}\PYG{n}{loss}\PYG{p}{,} \PYG{n}{dream}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+  \PYG{n}{grads} \PYG{o}{/=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{maximum}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{grads}\PYG{p}{)),} \PYG{l+m+mf}{1e\PYGZhy{}7}\PYG{p}{)}
+  \PYG{n}{outputs} \PYG{o}{=} \PYG{p}{[}\PYG{n}{loss}\PYG{p}{,} \PYG{n}{grads}\PYG{p}{]}
+  \PYG{n}{fetch\PYGZus{}loss\PYGZus{}and\PYGZus{}grads} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{function}\PYG{p}{([}\PYG{n}{dream}\PYG{p}{],} \PYG{n}{outputs}\PYG{p}{)}
+
+  \PYG{k}{def} \PYG{n+nf}{eval\PYGZus{}loss\PYGZus{}and\PYGZus{}grads}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+      \PYG{n}{outs} \PYG{o}{=} \PYG{n}{fetch\PYGZus{}loss\PYGZus{}and\PYGZus{}grads}\PYG{p}{([}\PYG{n}{x}\PYG{p}{])}
+      \PYG{n}{loss\PYGZus{}value} \PYG{o}{=} \PYG{n}{outs}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+      \PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n}{outs}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+      \PYG{k}{return} \PYG{n}{loss\PYGZus{}value}\PYG{p}{,} \PYG{n}{grad\PYGZus{}values}
+
+  \PYG{k}{def} \PYG{n+nf}{gradient\PYGZus{}ascent}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{iterations}\PYG{p}{,} \PYG{n}{step}\PYG{p}{,} \PYG{n}{max\PYGZus{}loss}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{):}
+      \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{iterations}\PYG{p}{):}
+          \PYG{n}{loss\PYGZus{}value}\PYG{p}{,} \PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n}{eval\PYGZus{}loss\PYGZus{}and\PYGZus{}grads}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+          \PYG{k}{if} \PYG{n}{max\PYGZus{}loss} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None} \PYG{o+ow}{and} \PYG{n}{loss\PYGZus{}value} \PYG{o}{\PYGZgt{}} \PYG{n}{max\PYGZus{}loss}\PYG{p}{:}
+              \PYG{k}{break}
+          \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}...Loss value at\PYGZsq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}:\PYGZsq{}}\PYG{p}{,} \PYG{n}{loss\PYGZus{}value}\PYG{p}{)}
+          \PYG{n}{x} \PYG{o}{+=} \PYG{n}{step} \PYG{o}{*} \PYG{n}{grad\PYGZus{}values}
+      \PYG{k}{return} \PYG{n}{x}
+\end{Verbatim}

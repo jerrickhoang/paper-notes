@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{layer\PYGZus{}dict} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{layer}\PYG{o}{.}\PYG{n}{name}\PYG{p}{:} \PYG{n}{layer} \PYG{k}{for} \PYG{n}{layer} \PYG{o+ow}{in} \PYG{n}{model}\PYG{o}{.}\PYG{n}{layers}\PYG{p}{\PYGZcb{}}
+
+  \PYG{n}{loss} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{variable}\PYG{p}{(}\PYG{l+m+mf}{0.}\PYG{p}{)}
+
+  \PYG{k}{for} \PYG{n}{layer\PYGZus{}name}\PYG{p}{,} \PYG{n}{coeff} \PYG{o+ow}{in} \PYG{n}{layer\PYGZus{}contributions}\PYG{o}{.}\PYG{n}{items}\PYG{p}{():}
+      \PYG{n}{activation} \PYG{o}{=} \PYG{n}{layer\PYGZus{}dict}\PYG{p}{[}\PYG{n}{layer\PYGZus{}name}\PYG{p}{]}\PYG{o}{.}\PYG{n}{output}
+
+      \PYG{c+c1}{\PYGZsh{} if activation shape is mxn then scaling = m * n}
+      \PYG{n}{scaling} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{prod}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{cast}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{(}\PYG{n}{activation}\PYG{p}{),} \PYG{l+s+s1}{\PYGZsq{}float32\PYGZsq{}}\PYG{p}{))}
+      \PYG{n}{loss} \PYG{o}{+=} \PYG{n}{coeff} \PYG{o}{*} \PYG{n}{K}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{square}\PYG{p}{(}\PYG{n}{activation}\PYG{p}{[:,} \PYG{l+m+mi}{2}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{p}{:]))} \PYG{o}{/} \PYG{n}{scaling}
+\end{Verbatim}

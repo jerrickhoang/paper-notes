@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{K}\PYG{o}{.}\PYG{n}{set\PYGZus{}learning\PYGZus{}phase}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+  \PYG{n}{model} \PYG{o}{=} \PYG{n}{inception\PYGZus{}v3}\PYG{o}{.}\PYG{n}{InceptionV3}\PYG{p}{(}\PYG{n}{weights}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}imagenet\PYGZsq{}}\PYG{p}{,} \PYG{n}{include\PYGZus{}top}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
+\end{Verbatim}

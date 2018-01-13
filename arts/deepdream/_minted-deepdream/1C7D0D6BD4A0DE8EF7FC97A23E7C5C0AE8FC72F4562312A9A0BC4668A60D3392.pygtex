@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{img} \PYG{o}{=} \PYG{n}{preprocess\PYGZus{}image}\PYG{p}{(}\PYG{n}{base\PYGZus{}image\PYGZus{}path}\PYG{p}{)}
+
+  \PYG{n}{original\PYGZus{}shape} \PYG{o}{=} \PYG{n}{img}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{3}\PYG{p}{]}
+
+  \PYG{n}{successive\PYGZus{}shapes} \PYG{o}{=} \PYG{p}{[}\PYG{n}{original\PYGZus{}shape}\PYG{p}{]}
+  \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{num\PYGZus{}octave}\PYG{p}{):}
+      \PYG{n}{shape} \PYG{o}{=} \PYG{n+nb}{tuple}\PYG{p}{([}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{/} \PYG{p}{(}\PYG{n}{octave\PYGZus{}scale} \PYG{o}{**} \PYG{n}{i}\PYG{p}{))} \PYG{k}{for} \PYG{n}{dim} \PYG{o+ow}{in} \PYG{n}{original\PYGZus{}shape}\PYG{p}{])}
+      \PYG{n}{successive\PYGZus{}shapes}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{shape}\PYG{p}{)}
+
+  \PYG{k}{print}\PYG{p}{(}\PYG{n}{successive\PYGZus{}shapes}\PYG{p}{)}
+  \PYG{n}{successive\PYGZus{}shapes} \PYG{o}{=} \PYG{n}{successive\PYGZus{}shapes}\PYG{p}{[::}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}
+  \PYG{n}{original\PYGZus{}img} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{n}{img}\PYG{p}{)}
+  \PYG{n}{shrunk\PYGZus{}original\PYGZus{}img} \PYG{o}{=} \PYG{n}{resize\PYGZus{}img}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{n}{successive\PYGZus{}shapes}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}
+
+  \PYG{k}{for} \PYG{n}{shape} \PYG{o+ow}{in} \PYG{n}{successive\PYGZus{}shapes}\PYG{p}{:}
+      \PYG{k}{print} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Processing image shape\PYGZsq{}}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{)}
+      \PYG{n}{img} \PYG{o}{=} \PYG{n}{resize\PYGZus{}img}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{)}
+      \PYG{n}{img} \PYG{o}{=} \PYG{n}{gradient\PYGZus{}ascent}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{n}{iterations}\PYG{o}{=}\PYG{n}{iterations}\PYG{p}{,} \PYG{n}{step}\PYG{o}{=}\PYG{n}{step}\PYG{p}{,} \PYG{n}{max\PYGZus{}loss}\PYG{o}{=}\PYG{n}{max\PYGZus{}loss}\PYG{p}{)}
+      \PYG{n}{upscaled\PYGZus{}shrunk\PYGZus{}original\PYGZus{}img} \PYG{o}{=} \PYG{n}{resize\PYGZus{}img}\PYG{p}{(}\PYG{n}{shrunk\PYGZus{}original\PYGZus{}img}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{)}
+      \PYG{n}{same\PYGZus{}size\PYGZus{}original\PYGZus{}img} \PYG{o}{=} \PYG{n}{resize\PYGZus{}img}\PYG{p}{(}\PYG{n}{original\PYGZus{}img}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{)}
+
+      \PYG{n}{lost\PYGZus{}detail} \PYG{o}{=} \PYG{n}{same\PYGZus{}size\PYGZus{}original\PYGZus{}img} \PYG{o}{\PYGZhy{}} \PYG{n}{upscaled\PYGZus{}shrunk\PYGZus{}original\PYGZus{}img}
+
+      \PYG{n}{img} \PYG{o}{+=} \PYG{n}{lost\PYGZus{}detail}
+      \PYG{n}{shrunk\PYGZus{}original\PYGZus{}img} \PYG{o}{=} \PYG{n}{resize\PYGZus{}img}\PYG{p}{(}\PYG{n}{original\PYGZus{}img}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{)}
+      \PYG{n}{save\PYGZus{}img}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{n}{fname}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}dream\PYGZus{}at\PYGZus{}scale\PYGZus{}\PYGZsq{}}\PYG{o}{+}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{shape}\PYG{p}{)}\PYG{o}{+}\PYG{l+s+s1}{\PYGZsq{}.png\PYGZsq{}}\PYG{p}{)}
+  \PYG{n}{save\PYGZus{}img}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{n}{fname}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}final\PYGZus{}dream.png\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}
