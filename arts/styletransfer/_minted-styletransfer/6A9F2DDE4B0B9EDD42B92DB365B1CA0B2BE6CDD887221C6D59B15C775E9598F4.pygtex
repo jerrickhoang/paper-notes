@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k+kn}{from} \PYG{n+nn}{scipy.optimize} \PYG{k+kn}{import} \PYG{n}{fmin\PYGZus{}l\PYGZus{}bfgs\PYGZus{}b}
+  \PYG{k+kn}{from} \PYG{n+nn}{scipy.misc} \PYG{k+kn}{import} \PYG{n}{imsave}
+  \PYG{k+kn}{import} \PYG{n+nn}{time}
+
+  \PYG{n}{result\PYGZus{}prefix} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}invoker\PYGZus{}2\PYGZsq{}}
+  \PYG{n}{iterations} \PYG{o}{=} \PYG{l+m+mi}{20}
+
+  \PYG{n}{x} \PYG{o}{=} \PYG{n}{preprocess\PYGZus{}image}\PYG{p}{(}\PYG{n}{target\PYGZus{}image\PYGZus{}path}\PYG{p}{)}
+  \PYG{n}{x} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{flatten}\PYG{p}{()}
+
+  \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{iterations}\PYG{p}{):}
+      \PYG{k}{print} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Start of iteration\PYGZsq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{)}
+      \PYG{n}{start\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()}
+      \PYG{n}{x}\PYG{p}{,} \PYG{n}{min\PYGZus{}val}\PYG{p}{,} \PYG{n}{info} \PYG{o}{=} \PYG{n}{fmin\PYGZus{}l\PYGZus{}bfgs\PYGZus{}b}\PYG{p}{(}\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{loss}\PYG{p}{,} \PYG{n}{x}\PYG{p}{,} \PYG{n}{fprime}\PYG{o}{=}\PYG{n}{evaluator}\PYG{o}{.}\PYG{n}{grads}\PYG{p}{,} \PYG{n}{maxfun}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{)}
+      \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Current loss value :\PYGZsq{}}\PYG{p}{,} \PYG{n}{min\PYGZus{}val}\PYG{p}{)}
+      \PYG{n}{img} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{()}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{((}\PYG{n}{img\PYGZus{}height}\PYG{p}{,} \PYG{n}{img\PYGZus{}width}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+      \PYG{n}{img} \PYG{o}{=} \PYG{n}{deprocess\PYGZus{}image}\PYG{p}{(}\PYG{n}{img}\PYG{p}{)}
+      \PYG{n}{fname} \PYG{o}{=} \PYG{n}{result\PYGZus{}prefix} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}at\PYGZus{}iteration\PYGZus{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{.png\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{i}
+      \PYG{n}{imsave}\PYG{p}{(}\PYG{n}{fname}\PYG{p}{,} \PYG{n}{img}\PYG{p}{)}
+      \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Image saved as \PYGZsq{}}\PYG{p}{,} \PYG{n}{fname}\PYG{p}{)}
+      \PYG{n}{end\PYGZus{}time} \PYG{o}{=} \PYG{n}{time}\PYG{o}{.}\PYG{n}{time}\PYG{p}{()}
+      \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Iteration }\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{ completed in }\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{ s\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{end\PYGZus{}time} \PYG{o}{\PYGZhy{}} \PYG{n}{start\PYGZus{}time}\PYG{p}{))}
+\end{Verbatim}

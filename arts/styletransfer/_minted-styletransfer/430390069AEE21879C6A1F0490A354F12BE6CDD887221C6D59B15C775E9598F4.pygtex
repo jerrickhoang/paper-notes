@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{grads} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{gradients}\PYG{p}{(}\PYG{n}{loss}\PYG{p}{,} \PYG{n}{combination\PYGZus{}image}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+  \PYG{n}{featch\PYGZus{}loss\PYGZus{}and\PYGZus{}grads} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{function}\PYG{p}{([}\PYG{n}{combination\PYGZus{}image}\PYG{p}{],} \PYG{p}{[}\PYG{n}{loss}\PYG{p}{,} \PYG{n}{grads}\PYG{p}{])}
+\end{Verbatim}

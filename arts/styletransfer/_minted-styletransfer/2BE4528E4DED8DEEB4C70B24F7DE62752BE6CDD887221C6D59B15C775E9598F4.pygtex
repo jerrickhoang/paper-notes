@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k}{def} \PYG{n+nf}{content\PYGZus{}loss}\PYG{p}{(}\PYG{n}{base}\PYG{p}{,} \PYG{n}{combination}\PYG{p}{):}
+      \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{square}\PYG{p}{(}\PYG{n}{combination} \PYG{o}{\PYGZhy{}} \PYG{n}{base}\PYG{p}{))}
+\end{Verbatim}

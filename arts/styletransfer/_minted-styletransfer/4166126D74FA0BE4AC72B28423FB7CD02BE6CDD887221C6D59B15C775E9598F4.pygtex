@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{n}{outputs\PYGZus{}dict} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{([}\PYG{n}{layer}\PYG{o}{.}\PYG{n}{name}\PYG{p}{,} \PYG{n}{layer}\PYG{o}{.}\PYG{n}{output}\PYG{p}{]} \PYG{k}{for} \PYG{n}{layer} \PYG{o+ow}{in} \PYG{n}{model}\PYG{o}{.}\PYG{n}{layers}\PYG{p}{)}
+  \PYG{n}{content\PYGZus{}layer} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}block5\PYGZus{}conv2\PYGZsq{}}
+  \PYG{n}{style\PYGZus{}layers} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}block1\PYGZus{}conv1\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}block2\PYGZus{}conv1\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}block3\PYGZus{}conv1\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}block4\PYGZus{}conv1\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}block5\PYGZus{}conv1\PYGZsq{}}\PYG{p}{]}
+  \PYG{n}{total\PYGZus{}variation\PYGZus{}weight} \PYG{o}{=} \PYG{l+m+mf}{1e\PYGZhy{}4}
+  \PYG{n}{style\PYGZus{}weight} \PYG{o}{=} \PYG{l+m+mf}{1.}
+  \PYG{n}{content\PYGZus{}weight} \PYG{o}{=} \PYG{l+m+mf}{0.025}
+  \PYG{n}{loss} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{variable}\PYG{p}{(}\PYG{l+m+mf}{0.}\PYG{p}{)}
+
+  \PYG{n}{layer\PYGZus{}features} \PYG{o}{=} \PYG{n}{outputs\PYGZus{}dict}\PYG{p}{[}\PYG{n}{content\PYGZus{}layer}\PYG{p}{]}
+  \PYG{n}{target\PYGZus{}image\PYGZus{}features} \PYG{o}{=} \PYG{n}{layer\PYGZus{}features}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{p}{:,} \PYG{p}{:,} \PYG{p}{:]}
+  \PYG{n}{combination\PYGZus{}features} \PYG{o}{=} \PYG{n}{layer\PYGZus{}features}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{p}{:,} \PYG{p}{:,} \PYG{p}{:]}
+  \PYG{n}{loss} \PYG{o}{+=} \PYG{n}{content\PYGZus{}weight} \PYG{o}{*} \PYG{n}{content\PYGZus{}loss}\PYG{p}{(}\PYG{n}{target\PYGZus{}image\PYGZus{}features}\PYG{p}{,} \PYG{n}{combination\PYGZus{}features}\PYG{p}{)}
+
+  \PYG{k}{for} \PYG{n}{layer\PYGZus{}name} \PYG{o+ow}{in} \PYG{n}{style\PYGZus{}layers}\PYG{p}{:}
+      \PYG{n}{layer\PYGZus{}features} \PYG{o}{=} \PYG{n}{outputs\PYGZus{}dict}\PYG{p}{[}\PYG{n}{layer\PYGZus{}name}\PYG{p}{]}
+      \PYG{n}{style\PYGZus{}reference\PYGZus{}features} \PYG{o}{=} \PYG{n}{layer\PYGZus{}features}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:,} \PYG{p}{:,} \PYG{p}{:]}
+      \PYG{n}{combination\PYGZus{}features} \PYG{o}{=} \PYG{n}{layer\PYGZus{}features}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{p}{:,} \PYG{p}{:,} \PYG{p}{:]}
+      \PYG{n}{sl} \PYG{o}{=} \PYG{n}{style\PYGZus{}loss}\PYG{p}{(}\PYG{n}{style\PYGZus{}reference\PYGZus{}features}\PYG{p}{,} \PYG{n}{combination\PYGZus{}features}\PYG{p}{)}
+      \PYG{n}{loss} \PYG{o}{+=} \PYG{p}{(}\PYG{n}{style\PYGZus{}weight}\PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{style\PYGZus{}layers}\PYG{p}{))} \PYG{o}{*} \PYG{n}{sl}
+  \PYG{n}{loss} \PYG{o}{+=} \PYG{n}{total\PYGZus{}variation\PYGZus{}weight} \PYG{o}{*} \PYG{n}{total\PYGZus{}variation\PYGZus{}loss}\PYG{p}{(}\PYG{n}{combination\PYGZus{}image}\PYG{p}{)}
+\end{Verbatim}

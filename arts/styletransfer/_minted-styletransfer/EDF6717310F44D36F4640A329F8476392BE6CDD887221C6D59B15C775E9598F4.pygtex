@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k+kn}{from} \PYG{n+nn}{keras} \PYG{k+kn}{import} \PYG{n}{backend} \PYG{k}{as} \PYG{n}{K}
+
+  \PYG{n}{target\PYGZus{}image} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{constant}\PYG{p}{(}\PYG{n}{preprocess\PYGZus{}image}\PYG{p}{(}\PYG{n}{target\PYGZus{}image\PYGZus{}path}\PYG{p}{))}
+  \PYG{n}{style\PYGZus{}reference\PYGZus{}image} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{constant}\PYG{p}{(}\PYG{n}{preprocess\PYGZus{}image}\PYG{p}{(}\PYG{n}{style\PYGZus{}reference\PYGZus{}image\PYGZus{}path}\PYG{p}{))}
+  \PYG{n}{combination\PYGZus{}image} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{placeholder}\PYG{p}{((}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{img\PYGZus{}height}\PYG{p}{,} \PYG{n}{img\PYGZus{}width}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+
+  \PYG{n}{input\PYGZus{}tensor} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{concatenate}\PYG{p}{(}
+      \PYG{p}{[}\PYG{n}{target\PYGZus{}image}\PYG{p}{,} \PYG{n}{style\PYGZus{}reference\PYGZus{}image}\PYG{p}{,} \PYG{n}{combination\PYGZus{}image}\PYG{p}{],} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+  \PYG{n}{model} \PYG{o}{=} \PYG{n}{vgg19}\PYG{o}{.}\PYG{n}{VGG19}\PYG{p}{(}\PYG{n}{input\PYGZus{}tensor}\PYG{o}{=}\PYG{n}{input\PYGZus{}tensor}\PYG{p}{,} \PYG{n}{weights}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}imagenet\PYGZsq{}}\PYG{p}{,} \PYG{n}{include\PYGZus{}top}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
+\end{Verbatim}

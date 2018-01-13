@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k}{def} \PYG{n+nf}{total\PYGZus{}variation\PYGZus{}loss}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+      \PYG{n}{a} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{square}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[:,} \PYG{p}{:}\PYG{n}{img\PYGZus{}height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:}\PYG{n}{img\PYGZus{}width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:]} \PYG{o}{\PYGZhy{}} \PYG{n}{x}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{:,} \PYG{p}{:}\PYG{n}{img\PYGZus{}width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:])}
+      \PYG{n}{b} \PYG{o}{=} \PYG{n}{K}\PYG{o}{.}\PYG{n}{square}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[:,} \PYG{p}{:}\PYG{n}{img\PYGZus{}height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:}\PYG{n}{img\PYGZus{}width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{p}{:]} \PYG{o}{\PYGZhy{}} \PYG{n}{x}\PYG{p}{[:,} \PYG{p}{:}\PYG{n}{img\PYGZus{}height}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{:,} \PYG{p}{:])}
+      \PYG{k}{return} \PYG{n}{K}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{K}\PYG{o}{.}\PYG{n}{pow}\PYG{p}{(}\PYG{n}{a} \PYG{o}{+} \PYG{n}{b}\PYG{p}{,} \PYG{l+m+mf}{1.25}\PYG{p}{))}
+\end{Verbatim}

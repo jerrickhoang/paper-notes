@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+  \PYG{k}{class} \PYG{n+nc}{Evaluator}\PYG{p}{(}\PYG{n+nb}{object}\PYG{p}{):}
+
+      \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value} \PYG{o}{=} \PYG{n+nb+bp}{None}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grads\PYGZus{}values} \PYG{o}{=} \PYG{n+nb+bp}{None}
+
+      \PYG{k}{def} \PYG{n+nf}{loss}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{x}\PYG{p}{):}
+          \PYG{k}{assert} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value} \PYG{o+ow}{is} \PYG{n+nb+bp}{None}
+
+          \PYG{n}{x} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{((}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{img\PYGZus{}height}\PYG{p}{,} \PYG{n}{img\PYGZus{}width}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+          \PYG{n}{outs} \PYG{o}{=} \PYG{n}{featch\PYGZus{}loss\PYGZus{}and\PYGZus{}grads}\PYG{p}{([}\PYG{n}{x}\PYG{p}{])}
+
+          \PYG{n}{loss\PYGZus{}value} \PYG{o}{=} \PYG{n}{outs}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+          \PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n}{outs}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{flatten}\PYG{p}{()}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}float64\PYGZsq{}}\PYG{p}{)}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value} \PYG{o}{=} \PYG{n}{loss\PYGZus{}value}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n}{grad\PYGZus{}values}
+          \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value}
+
+      \PYG{k}{def} \PYG{n+nf}{grads}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{x}\PYG{p}{):}
+          \PYG{k}{assert} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None}
+          \PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grad\PYGZus{}values}\PYG{p}{)}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{loss\PYGZus{}value} \PYG{o}{=} \PYG{n+nb+bp}{None}
+          \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grad\PYGZus{}values} \PYG{o}{=} \PYG{n+nb+bp}{None}
+          \PYG{k}{return} \PYG{n}{grad\PYGZus{}values}
+
+  \PYG{n}{evaluator} \PYG{o}{=} \PYG{n}{Evaluator}\PYG{p}{()}
+\end{Verbatim}
