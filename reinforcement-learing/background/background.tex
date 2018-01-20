@@ -398,13 +398,18 @@ Notice that,
 \end{split}
 \end{equation}
 
-There are two spectacular things about this equation,
+This is called the likelihood ratio gradient. There are two spectacular things about this equation,
 
 \begin{itemize}
 \item The gradient of the reward function doesn't depend on the dynamics of the environment. This method is model-free
 \item The reward function does not have to be continuous and can also be stochastic, because we only have to take gradient of our policy
 \end{itemize}
 
+The problem with updating policy using one rollout is high variance. Actor-critic method and similar methods are variants of policy gradient method aim to solve this problem. There are two main ideas,
 
+\begin{itemize}
+\item We can introduce an unbiased quantity (we call a baseline) that helps reduce the variant. Concretely, if $\nabla_{\theta}E_{\tau}[b | \theta] = 0$. Then we can estimate the gradient using $E[ \sum_i \nabla_{\theta}  \log \pi_{\theta} (a_i | s_i)) (\sum \gamma^t R(s_t, a_t) - b) $, which has lower variance. One popular choice of baseline is the state-value function $V^{\pi}$, so the objective function becomes $U(\theta) = E[R(\tau) | \theta] = E[\sum \gamma^t R(s_t, a_t) - V^{\pi}(s_0)| \theta]$
+\item We may want to average across multiple rollouts then take the gradient. If we fix the first state and action, then the quantity in interest becomes the state-action value. If we define the advantage function $A^{\pi}_t = Q^{\pi}(s_t, a_t) - V^{\pi}(s_t)$. Then another candidate for loss function can be,  $U(\theta) = E[R(\tau) | \theta] = E[A^{\pi}_t | \theta]$. We will go into more details about these methods in subsequent paper notes.
+\end{itemize}
 \end{document}
 
