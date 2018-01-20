@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k}{def} \PYG{n+nf}{policy\PYGZus{}eval}\PYG{p}{(}\PYG{n}{policy}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{discount\PYGZus{}factor}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{n}{theta}\PYG{o}{=}\PYG{l+m+mf}{0.00001}\PYG{p}{):}
+  \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{  Evaluate a policy given an environment and a full description}
+\PYG{l+s+sd}{  of the environment\PYGZsq{}s dynamics.}
+
+\PYG{l+s+sd}{  Args:}
+\PYG{l+s+sd}{      policy: [S, A] shaped matrix representing the policy.}
+\PYG{l+s+sd}{      env: OpenAI env. env.P represents the transition}
+\PYG{l+s+sd}{      probabilities of the environment.}
+\PYG{l+s+sd}{          env.P[s][a] is a list of transition tuples (}
+\PYG{l+s+sd}{          prob, next\PYGZus{}state, reward, done).}
+\PYG{l+s+sd}{          env.nS is a number of states in the environment.}
+\PYG{l+s+sd}{          env.nA is a number of actions in the environment.}
+\PYG{l+s+sd}{      theta: We stop evaluation once our value function}
+\PYG{l+s+sd}{      change is less than theta for all states.}
+\PYG{l+s+sd}{      discount\PYGZus{}factor: Gamma discount factor.}
+
+\PYG{l+s+sd}{  Returns:}
+\PYG{l+s+sd}{      Vector of length env.nS representing the value function.}
+\PYG{l+s+sd}{  \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+  \PYG{c+c1}{\PYGZsh{} Start with a random (all 0) value function}
+  \PYG{n}{V} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{)}
+  \PYG{k}{while} \PYG{n+nb+bp}{True}\PYG{p}{:}
+      \PYG{n}{delta} \PYG{o}{=} \PYG{l+m+mi}{0}
+      \PYG{c+c1}{\PYGZsh{} For each state, perform a \PYGZdq{}full backup\PYGZdq{}}
+      \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{):}
+          \PYG{n}{v} \PYG{o}{=} \PYG{l+m+mi}{0}
+          \PYG{c+c1}{\PYGZsh{} Look at the possible next actions}
+          \PYG{k}{for} \PYG{n}{a}\PYG{p}{,} \PYG{n}{action\PYGZus{}prob} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]):}
+              \PYG{c+c1}{\PYGZsh{} For each action, look at the possible next states...}
+              \PYG{k}{for}  \PYG{n}{prob}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n}{env}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{][}\PYG{n}{a}\PYG{p}{]:}
+                  \PYG{c+c1}{\PYGZsh{} Calculate the expected value}
+                  \PYG{n}{v} \PYG{o}{+=} \PYG{n}{action\PYGZus{}prob} \PYG{o}{*} \PYG{n}{prob} \PYG{o}{*} \PYG{p}{(}\PYG{n}{reward} \PYG{o}{+} \PYGZbs{}
+                          \PYG{n}{discount\PYGZus{}factor} \PYG{o}{*} \PYG{n}{V}\PYG{p}{[}\PYG{n}{next\PYGZus{}state}\PYG{p}{])}
+          \PYG{c+c1}{\PYGZsh{} How much our value function changed}
+          \PYG{c+c1}{\PYGZsh{} (across any states)}
+          \PYG{n}{delta} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{delta}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{v} \PYG{o}{\PYGZhy{}} \PYG{n}{V}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]))}
+          \PYG{n}{V}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]} \PYG{o}{=} \PYG{n}{v}
+      \PYG{c+c1}{\PYGZsh{} Stop evaluating once our value function change is}
+      \PYG{c+c1}{\PYGZsh{} below a threshold}
+      \PYG{k}{if} \PYG{n}{delta} \PYG{o}{\PYGZlt{}} \PYG{n}{theta}\PYG{p}{:}
+          \PYG{k}{break}
+  \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}
+\end{Verbatim}

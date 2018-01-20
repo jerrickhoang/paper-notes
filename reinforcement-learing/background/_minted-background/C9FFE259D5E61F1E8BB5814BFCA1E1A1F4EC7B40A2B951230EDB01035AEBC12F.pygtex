@@ -1,0 +1,55 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k}{def} \PYG{n+nf}{policy\PYGZus{}improvement}\PYG{p}{(}\PYG{n}{env}\PYG{p}{,} \PYG{n}{policy\PYGZus{}eval\PYGZus{}fn}\PYG{o}{=}\PYG{n}{policy\PYGZus{}eval}\PYG{p}{,} \PYG{n}{discount\PYGZus{}factor}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{):}
+  \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{  Policy Improvement Algorithm. Iteratively evaluates}
+\PYG{l+s+sd}{  and improves a policy until an optimal policy is found.}
+
+\PYG{l+s+sd}{  Args:}
+\PYG{l+s+sd}{      env: The OpenAI envrionment.}
+\PYG{l+s+sd}{      policy\PYGZus{}eval\PYGZus{}fn: Policy Evaluation function that takes}
+\PYG{l+s+sd}{      3 arguments:}
+\PYG{l+s+sd}{          policy, env, discount\PYGZus{}factor.}
+\PYG{l+s+sd}{      discount\PYGZus{}factor: gamma discount factor.}
+
+\PYG{l+s+sd}{  Returns:}
+\PYG{l+s+sd}{      A tuple (policy, V).}
+\PYG{l+s+sd}{      policy is the optimal policy, a matrix of shape [S, A]}
+\PYG{l+s+sd}{      where each state s contains a valid probability}
+\PYG{l+s+sd}{      distribution over actions. V is the value function}
+\PYG{l+s+sd}{      for the optimal policy.}
+
+\PYG{l+s+sd}{  \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+  \PYG{c+c1}{\PYGZsh{} Start with a random policy}
+  \PYG{n}{policy} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{ones}\PYG{p}{([}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{,} \PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{])} \PYG{o}{/} \PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}
+
+  \PYG{k}{while} \PYG{n+nb+bp}{True}\PYG{p}{:}
+      \PYG{c+c1}{\PYGZsh{} Evaluate the current policy}
+      \PYG{n}{V} \PYG{o}{=} \PYG{n}{policy\PYGZus{}eval\PYGZus{}fn}\PYG{p}{(}\PYG{n}{policy}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{discount\PYGZus{}factor}\PYG{p}{)}
+
+      \PYG{c+c1}{\PYGZsh{} Will be set to false if we make any changes to the policy}
+      \PYG{n}{policy\PYGZus{}stable} \PYG{o}{=} \PYG{n+nb+bp}{True}
+
+      \PYG{c+c1}{\PYGZsh{} For each state...}
+      \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{):}
+          \PYG{c+c1}{\PYGZsh{} The best action we would take under the currect policy}
+          \PYG{n}{chosen\PYGZus{}a} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{])}
+
+          \PYG{c+c1}{\PYGZsh{} Find the best action by one\PYGZhy{}step lookahead}
+          \PYG{c+c1}{\PYGZsh{} Ties are resolved arbitarily}
+          \PYG{n}{action\PYGZus{}values} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{)}
+          \PYG{k}{for} \PYG{n}{a} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{):}
+              \PYG{k}{for} \PYG{n}{prob}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n}{env}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{][}\PYG{n}{a}\PYG{p}{]:}
+                  \PYG{n}{action\PYGZus{}values}\PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{prob} \PYG{o}{*} \PYG{p}{(}\PYG{n}{reward} \PYG{o}{+} \PYGZbs{}
+                        \PYG{n}{discount\PYGZus{}factor} \PYG{o}{*} \PYG{n}{V}\PYG{p}{[}\PYG{n}{next\PYGZus{}state}\PYG{p}{])}
+          \PYG{n}{best\PYGZus{}a} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{action\PYGZus{}values}\PYG{p}{)}
+
+          \PYG{c+c1}{\PYGZsh{} Greedily update the policy}
+          \PYG{k}{if} \PYG{n}{chosen\PYGZus{}a} \PYG{o}{!=} \PYG{n}{best\PYGZus{}a}\PYG{p}{:}
+              \PYG{n}{policy\PYGZus{}stable} \PYG{o}{=} \PYG{n+nb+bp}{False}
+          \PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{)[}\PYG{n}{best\PYGZus{}a}\PYG{p}{]}
+
+      \PYG{c+c1}{\PYGZsh{} If the policy is stable we\PYGZsq{}ve found an optimal policy.}
+      \PYG{c+c1}{\PYGZsh{} Return it}
+      \PYG{k}{if} \PYG{n}{policy\PYGZus{}stable}\PYG{p}{:}
+          \PYG{k}{return} \PYG{n}{policy}\PYG{p}{,} \PYG{n}{V}
+\end{Verbatim}

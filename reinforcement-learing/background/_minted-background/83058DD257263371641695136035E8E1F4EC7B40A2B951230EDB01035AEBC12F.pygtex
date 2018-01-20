@@ -1,0 +1,68 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k}{ef} \PYG{n+nf}{value\PYGZus{}iteration}\PYG{p}{(}\PYG{n}{env}\PYG{p}{,} \PYG{n}{theta}\PYG{o}{=}\PYG{l+m+mf}{0.0001}\PYG{p}{,} \PYG{n}{discount\PYGZus{}factor}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{):}
+  \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{  Value Iteration Algorithm.}
+
+\PYG{l+s+sd}{  Args:}
+\PYG{l+s+sd}{      env: OpenAI env. env.P represents the transition probabilities}
+\PYG{l+s+sd}{      of the environment.}
+\PYG{l+s+sd}{          env.P[s][a] is a list of transition tuples}
+\PYG{l+s+sd}{               (prob, next\PYGZus{}state, reward, done).}
+\PYG{l+s+sd}{          env.nS is a number of states in the environment.}
+\PYG{l+s+sd}{          env.nA is a number of actions in the environment.}
+\PYG{l+s+sd}{      theta: We stop evaluation once our value function change}
+\PYG{l+s+sd}{          is less than theta for all states.}
+\PYG{l+s+sd}{      discount\PYGZus{}factor: Gamma discount factor.}
+
+\PYG{l+s+sd}{  Returns:}
+\PYG{l+s+sd}{      A tuple (policy, V) of the optimal policy and the optimal}
+\PYG{l+s+sd}{      value function.}
+\PYG{l+s+sd}{  \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+  \PYG{k}{def} \PYG{n+nf}{one\PYGZus{}step\PYGZus{}lookahead}\PYG{p}{(}\PYG{n}{state}\PYG{p}{,} \PYG{n}{V}\PYG{p}{):}
+      \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{      Helper function to calculate the value for all action in a}
+\PYG{l+s+sd}{      given state.}
+
+\PYG{l+s+sd}{      Args:}
+\PYG{l+s+sd}{          state: The state to consider (int)}
+\PYG{l+s+sd}{          V: The value to use as an estimator, Vector of length env.nS}
+
+\PYG{l+s+sd}{      Returns:}
+\PYG{l+s+sd}{          A vector of length env.nA containing the expected value}
+\PYG{l+s+sd}{          of each action.}
+\PYG{l+s+sd}{      \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+      \PYG{n}{A} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{)}
+      \PYG{k}{for} \PYG{n}{a} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{):}
+          \PYG{k}{for} \PYG{n}{prob}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n}{env}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{state}\PYG{p}{][}\PYG{n}{a}\PYG{p}{]:}
+              \PYG{n}{A}\PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{prob} \PYG{o}{*} \PYG{p}{(}\PYG{n}{reward} \PYG{o}{+} \PYG{n}{discount\PYGZus{}factor} \PYG{o}{*} \PYG{n}{V}\PYG{p}{[}\PYG{n}{next\PYGZus{}state}\PYG{p}{])}
+      \PYG{k}{return} \PYG{n}{A}
+
+  \PYG{n}{V} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{)}
+  \PYG{k}{while} \PYG{n+nb+bp}{True}\PYG{p}{:}
+      \PYG{c+c1}{\PYGZsh{} Stopping condition}
+      \PYG{n}{delta} \PYG{o}{=} \PYG{l+m+mi}{0}
+      \PYG{c+c1}{\PYGZsh{} Update each state...}
+      \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{):}
+          \PYG{c+c1}{\PYGZsh{} Do a one\PYGZhy{}step lookahead to find the best action}
+          \PYG{n}{A} \PYG{o}{=} \PYG{n}{one\PYGZus{}step\PYGZus{}lookahead}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{V}\PYG{p}{)}
+          \PYG{n}{best\PYGZus{}action\PYGZus{}value} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}
+          \PYG{c+c1}{\PYGZsh{} Calculate delta across all states seen so far}
+          \PYG{n}{delta} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{delta}\PYG{p}{,} \PYG{n}{np}\PYG{o}{.}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{best\PYGZus{}action\PYGZus{}value} \PYG{o}{\PYGZhy{}} \PYG{n}{V}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]))}
+          \PYG{c+c1}{\PYGZsh{} Update the value function}
+          \PYG{n}{V}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]} \PYG{o}{=} \PYG{n}{best\PYGZus{}action\PYGZus{}value}
+      \PYG{c+c1}{\PYGZsh{} Check if we can stop}
+      \PYG{k}{if} \PYG{n}{delta} \PYG{o}{\PYGZlt{}} \PYG{n}{theta}\PYG{p}{:}
+          \PYG{k}{break}
+
+  \PYG{c+c1}{\PYGZsh{} Create a deterministic policy using the optimal value function}
+  \PYG{n}{policy} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{([}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{,} \PYG{n}{env}\PYG{o}{.}\PYG{n}{nA}\PYG{p}{])}
+  \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{env}\PYG{o}{.}\PYG{n}{nS}\PYG{p}{):}
+      \PYG{c+c1}{\PYGZsh{} One step lookahead to find the best action for this state}
+      \PYG{n}{A} \PYG{o}{=} \PYG{n}{one\PYGZus{}step\PYGZus{}lookahead}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{V}\PYG{p}{)}
+      \PYG{n}{best\PYGZus{}action} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{A}\PYG{p}{)}
+      \PYG{c+c1}{\PYGZsh{} Always take the best action}
+      \PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{,} \PYG{n}{best\PYGZus{}action}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mf}{1.0}
+
+  \PYG{k}{return} \PYG{n}{policy}\PYG{p}{,} \PYG{n}{V}
+\end{Verbatim}
