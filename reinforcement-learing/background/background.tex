@@ -383,7 +383,7 @@ So far, most of the methods we've seen try to find the policy indirectly via a v
 \item 
 \end{itemize}
 
-Policy gradient method tries to learn the policy directly from an episode of experience. Concretely, suppose $\tau = s_0, a_0, s_1, a_1, .. , s_N, a_N$ a rollout of a policy $\pi_{\theta}$. We wish to find $\theta$ maximizing the reward of the rollout,
+Policy gradient method tries to learn the policy directly from an episode of experience. Concretely, suppose $\tau = s_0, a_0, s_1, a_1, .. , s_N, a_N$ a rollout of a policy $\pi_{\theta}$. We wish to find $\theta$ maximizing the expected return of a policy,
 
 \begin{center}
  $U(\theta) = E[R(\tau) | \theta] = E[\sum \gamma^t R(s_t, a_t) | \theta]$

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  20 JAN 2018 20:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  21 JAN 2018 10:19
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**background.tex
-(./background.tex
+**pd_is.tex
+(./pd_is.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
 (./svmult.cls
@@ -554,11 +554,11 @@ Package pdftexcmds Info: \pdfdraftmode found.
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/catchfile.sty
 Package: catchfile 2016/05/16 v1.7 Catch the contents of a file (HO)
 )
-runsystem(uname -s > "background.w18")...executed.
+runsystem(uname -s > "pd_is.w18")...executed.
 
 
-(./background.w18)
-runsystem(rm -- "background.w18")...executed.
+(./pd_is.w18)
+runsystem(rm -- "pd_is.w18")...executed.
 
 )
 (/usr/local/texlive/2017/texmf-dist/tex/generic/xstring/xstring.sty
@@ -577,7 +577,7 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 \@float@every@listing=\toks29
 \c@listing=\count165
 )
-runsystem(mkdir -p _minted-background)...executed.
+runsystem(mkdir -p _minted-pd_is)...executed.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/soul/soul.sty
@@ -1001,16 +1001,16 @@ File: babel.def 2017/05/19 3.10 Babel common definitions
 \l@newzealand = a dialect from \language\l@british 
 ))
 \@indexfile=\write7
-\openout7 = `background.idx'.
+\openout7 = `pd_is.idx'.
 
 
-Writing index file background.idx
-runsystem(which pygmentize && touch background.aex)...executed.
+Writing index file pd_is.idx
+runsystem(which pygmentize && touch pd_is.aex)...executed.
 
-runsystem(rm background.aex)...executed.
+runsystem(rm pd_is.aex)...executed.
 
-(./background.aux)
-\openout1 = `background.aux'.
+(./pd_is.aux)
+\openout1 = `pd_is.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
 LaTeX Font Info:    ... okay on input line 44.
@@ -1031,7 +1031,8 @@ File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 44.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 44.
- (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1105,197 +1106,37 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
+
+Title too long for running head. Please supply
+a shorter form with \titlerunning prior to \maketitle
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 56.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 61.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 63.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 67.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 62.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-<learning.png, id=1, 107.86568pt x 65.79807pt>
-File: learning.png Graphic file (type png)
- <use learning.png>
-Package pdftex.def Info: learning.png used on input line 76.
-(pdftex.def)             Requested size: 166.44861pt x 101.53915pt.
- [1
+) [1
 
 
 
-{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./l
-earning.png>]
-Overfull \hbox (58.06061pt too wide) detected at line 118
-\OML/ztmcm/m/it/10 q[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 S[]; A[]\OT1/ztmcm/
-m/n/10 ) = \OML/ztmcm/m/it/10 E\OT1/ztmcm/m/n/10 [\OML/ztmcm/m/it/10 G[]\OMS/zt
-mcm/m/n/10 j\OML/ztmcm/m/it/10 S[]; A[]\OT1/ztmcm/m/n/10 ] = \OML/ztmcm/m/it/10
- E\OT1/ztmcm/m/n/10 [[] \OML/ztmcm/m/it/10 ^^M[]R[]\OMS/ztmcm/m/n/10 j\OML/ztmc
-m/m/it/10 S[]; A[]\OT1/ztmcm/m/n/10 ] = \OML/ztmcm/m/it/10 E\OT1/ztmcm/m/n/10 [
-\OML/ztmcm/m/it/10 R[] \OT1/ztmcm/m/n/10 + \OML/ztmcm/m/it/10 ^^MG[]\OMS/ztmcm/
-m/n/10 j\OML/ztmcm/m/it/10 S[]; A[]\OT1/ztmcm/m/n/10 ] = \OML/ztmcm/m/it/10 E\O
-T1/ztmcm/m/n/10 [\OML/ztmcm/m/it/10 R[] \OT1/ztmcm/m/n/10 + \OML/ztmcm/m/it/10 
-^^MQ[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 S[]; A[]\OT1/ztmcm/m/n/10 )\OMS/ztm
-cm/m/n/10 j\OML/ztmcm/m/it/10 S[]; A[]\OT1/ztmcm/m/n/10 ]
- []
-
-
-Overfull \hbox (22.3905pt too wide) in paragraph at lines 122--123
-[]$\OML/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 s\OT1/ztmcm/m/n/
-10 ) = \OML/ztmcm/m/it/10 E[]\OT1/ztmcm/m/n/10 [\OML/ztmcm/m/it/10 q[]\OT1/ztmc
-m/m/n/10 (\OML/ztmcm/m/it/10 s; a\OT1/ztmcm/m/n/10 )] = [][] \OML/ztmcm/m/it/10
- ^^Y\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 a\OMS/ztmcm/m/n/10 j\OML/ztmcm/m/it/1
-0 s\OT1/ztmcm/m/n/10 )\OML/ztmcm/m/it/10 q[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
-10 s; a\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 , and $\OML/ztmcm/m/it/10 q[]\OT1/zt
-mcm/m/n/10 (\OML/ztmcm/m/it/10 s; a\OT1/ztmcm/m/n/10 ) = \OML/ztmcm/m/it/10 R[]
- \OT1/ztmcm/m/n/10 + \OML/ztmcm/m/it/10 ^^M [][] P\OT1/ztmcm/m/n/10 (\OML/ztmcm
-/m/it/10 s; a; s[]\OT1/ztmcm/m/n/10 )\OML/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\
-OML/ztmcm/m/it/10 s[]\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 . 
- []
-
-
-Overfull \hbox (38.78775pt too wide) in paragraph at lines 124--125
-[]\OT1/ptm/m/n/10 So, $\OML/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it
-/10 s\OT1/ztmcm/m/n/10 ) = \OML/ztmcm/m/it/10 E[]\OT1/ztmcm/m/n/10 [\OML/ztmcm/
-m/it/10 q[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 s; a\OT1/ztmcm/m/n/10 )] = [][
-] \OML/ztmcm/m/it/10 ^^Y\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 a\OMS/ztmcm/m/n/1
-0 j\OML/ztmcm/m/it/10 s\OT1/ztmcm/m/n/10 )\OML/ztmcm/m/it/10 q[]\OT1/ztmcm/m/n/
-10 (\OML/ztmcm/m/it/10 s; a\OT1/ztmcm/m/n/10 ) = [][] \OML/ztmcm/m/it/10 ^^Y\OT
-1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 a\OMS/ztmcm/m/n/10 j\OML/ztmcm/m/it/10 s\OT1
-/ztmcm/m/n/10 )(\OML/ztmcm/m/it/10 R[] \OT1/ztmcm/m/n/10 + \OML/ztmcm/m/it/10 ^
-^M [][] P\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 s; a; s[]\OT1/ztmcm/m/n/10 )\OML
-/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 s[]\OT1/ztmcm/m/n/10 ))
-$ 
- []
-
-<policy_iter.png, id=22, 1102.1175pt x 590.205pt>
-File: policy_iter.png Graphic file (type png)
- <use policy_iter.png>
-Package pdftex.def Info: policy_iter.png used on input line 128.
-(pdftex.def)             Requested size: 332.89723pt x 178.26964pt.
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 128--129
-[][] 
- []
-
-\openout4 = `background.pyg'.
-
-(./_minted-background/default-pyg-prefix.pygstyle)
-(./_minted-background/default.pygstyle)
-(./_minted-background/1F43B7A3C0909BE23476996468419144F4EC7B40A2B951230EDB01035
-AEBC12F.pygtex
-LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 2.
-LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 3.
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 5.
- (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ts1pcr.fd
-File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)
-LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <10> not available
-(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 5.
-
-[3 <./policy_iter.png>])
-\openout4 = `background.pyg'.
-
-
-(./_minted-background/C9FFE259D5E61F1E8BB5814BFCA1E1A1F4EC7B40A2B951230EDB01035
-AEBC12F.pygtex [4] [5])
-Overfull \hbox (27.39961pt too wide) in paragraph at lines 241--242
-\OT1/ptm/m/n/10 then we can find $\OML/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\OML
-/ztmcm/m/it/10 s\OT1/ztmcm/m/n/10 )$ \OT1/ptm/m/n/10 by do-ing one-step look ah
-ead, $\OML/ztmcm/m/it/10 v[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 s\OT1/ztmcm/m
-/n/10 ) = \OML/ztmcm/m/it/10 max[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 R[] \OT
-1/ztmcm/m/n/10 + \OML/ztmcm/m/it/10 ^^M [][] P[]v[]\OT1/ztmcm/m/n/10 (\OML/ztmc
-m/m/it/10 s[]\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 .
- []
-
-\openout4 = `background.pyg'.
-
-
-(./_minted-background/83058DD257263371641695136035E8E1F4EC7B40A2B951230EDB01035
-AEBC12F.pygtex [6])
-Overfull \hbox (5.83757pt too wide) in paragraph at lines 319--320
-[]\OT1/ptm/m/n/10 First, let's re-state the MDP setup with-out the full-observa
-ble con-di-tion. A partially-
- []
-
-[7] [8] <mctd.png, id=46, 652.4375pt x 370.38374pt>
-File: mctd.png Graphic file (type png)
- <use mctd.png>
-Package pdftex.def Info: mctd.png used on input line 363.
-(pdftex.def)             Requested size: 332.89723pt x 188.98927pt.
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 363--364
-[][] 
- []
-
-<mc.png, id=47, 641.39626pt x 406.51875pt>
-File: mc.png Graphic file (type png)
- <use mc.png>
-Package pdftex.def Info: mc.png used on input line 368.
-(pdftex.def)             Requested size: 332.89723pt x 210.99397pt.
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 368--369
-[][] 
- []
-
-<td.png, id=48, 600.2425pt x 397.485pt>
-File: td.png Graphic file (type png)
- <use td.png>
-Package pdftex.def Info: td.png used on input line 370.
-(pdftex.def)             Requested size: 332.89723pt x 220.45515pt.
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 370--371
-[][] 
- []
-
-[9 <./mctd.png> <./mc.png>]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 372.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 372.
- <forward.png, id=54, 675.52374pt x 219.82124pt>
-File: forward.png Graphic file (type png)
-
-<use forward.png>
-Package pdftex.def Info: forward.png used on input line 376.
-(pdftex.def)             Requested size: 332.89723pt x 108.3305pt.
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 376--377
-[][] 
- []
-
-[10 <./td.png> <./forward.png>] [11] (./background.aux)
-runsystem(rm background.pyg)...executed.
-
- ) 
+{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./pd_i
+s.aux) ) 
 Here is how much of TeX's memory you used:
- 8919 strings out of 492995
- 138948 string characters out of 6132704
- 262548 words of memory out of 5000000
- 12233 multiletter control sequences out of 15000+600000
- 46111 words of font info for 97 fonts, out of 8000000 for 9000
+ 8590 strings out of 492995
+ 133679 string characters out of 6132704
+ 256225 words of memory out of 5000000
+ 11963 multiletter control sequences out of 15000+600000
+ 22194 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,16n,32p,841b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
-xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
-ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2017/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2017/
-texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2017/texmf-di
-st/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts
-/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
-urw/symbol/usyr.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/symbol/
-usyr.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
-/usr/local/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/loca
-l/texlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/
-2017/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on background.pdf (11 pages, 630368 bytes).
+ 38i,5n,32p,836b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texli
+ve/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on pd_is.pdf (1 page, 21227 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 17 PDF objects out of 1000 (max. 8388607)
+ 11 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
